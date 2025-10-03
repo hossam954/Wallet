@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Auto Trader 5</title>
+  <style>
+    :root{
+      --bg1:#0f172a;
+      --bg2:#071130;
+      --card:#0b1220;
+      --accent:#06b6d4;
+      --muted:#94a3b8;
+      --glass: rgba(255,255,255,0.04);
+      --danger:#ef4444;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; padding:0;
+      background:linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex; align-items:center; justify-content:center;
+      padding:32px;
+    }
+
+    .container{
+      width:100%; max-width:980px;
+      display:grid; grid-template-columns:1fr 420px; gap:28px;
+    }
+
+    .hero{
+      padding:28px; border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      box-shadow:0 8px 30px rgba(2,6,23,0.6); border:1px solid rgba(255,255,255,0.04);
+      display:flex; flex-direction:column; gap:18px; align-items:flex-start; justify-content:center;
+    }
+    .logo{
+      display:flex; align-items:center; gap:12px;
+    }
+    .logo .mark{
+      width:56px; height:56px; border-radius:12px; background:linear-gradient(135deg,var(--accent), #7c3aed);
+      display:flex; align-items:center; justify-content:center; font-weight:700; color:#071130;
+      box-shadow:0 6px 18px rgba(6,182,212,0.15) inset;
+    }
+    h1{margin:0; font-size:22px}
+    p.lead{margin:0; color:var(--muted)}
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px; padding:28px; width:100%; max-width:420px;
+      box-shadow:0 10px 30px rgba(2,6,23,0.6); border:1px solid rgba(255,255,255,0.04);
+      display:flex; flex-direction:column; gap:16px;
+    }
+
+    label{font-size:13px; color:var(--muted); margin-bottom:6px; display:block}
+    input[type="email"], input[type="password"]{
+      width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.04);
+      background:var(--glass); color:inherit; outline:none; font-size:15px;
+      transition:box-shadow .18s, border-color .18s, transform .08s;
+    }
+    input:focus{box-shadow:0 6px 18px rgba(6,182,212,0.08); border-color:rgba(6,182,212,0.6); transform:translateY(-1px)}
+
+    .actions{display:flex; gap:12px; align-items:center}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; border-radius:10px;
+      border:none; cursor:pointer; font-weight:600; font-size:15px; background:var(--accent); color:#04202a;
+    }
+    .btn.ghost{background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); font-weight:600}
+    .muted-link{color:var(--muted); text-decoration:none; font-size:14px}
+
+    .error{
+      background:rgba(239,68,68,0.07); border-left:4px solid rgba(239,68,68,0.18); color:var(--danger);
+      padding:10px 12px; border-radius:8px; display:none; font-weight:600; align-items:center; gap:10px
+    }
+
+    .small{font-size:13px; color:var(--muted)}
+
+    /* subtle animation when error shown */
+    @keyframes shake {
+      0% { transform: translateX(0) }
+      20% { transform: translateX(-6px) }
+      40% { transform: translateX(6px) }
+      60% { transform: translateX(-4px) }
+      80% { transform: translateX(4px) }
+      100% { transform: translateX(0) }
+    }
+
+    /* responsive */
+    @media (max-width:880px){
+      .container{grid-template-columns:1fr;}
+      .hero{order:2}
+      .card{order:1}
+    }
+
+    /* create-account panel */
+    .create-panel{display:none; flex-direction:column; gap:12px;}
+    .create-panel.open{display:flex}
+    .ghost-btn{background:transparent; border:1px dashed rgba(255,255,255,0.04); padding:10px; border-radius:8px}
+
+    footer {margin-top:8px; color:var(--muted); font-size:13px}
+  </style>
+</head>
+<body>
+  <main class="container" role="main">
+    <section class="hero" aria-labelledby="title">
+      <div class="logo">
+        <div class="mark">AT5</div>
+        <div>
+          <h1 id="title">Auto Trader 5</h1>
+          <p class="lead">لوحة دخول احترافية لتتبع وإدارة صفقاتك — تصميم نظيف وسهل الاستخدام.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:6px">
+        <h2 style="margin:0 0 8px 0">ميزات سريعة</h2>
+        <ul style="margin:0; padding-left:18px; color:var(--muted)">
+          <li>تصميم متجاوب مناسب للهواتف والحاسوب</li>
+          <li>تنبيهات واضحة عند فشل تسجيل الدخول</li>
+          <li>إمكانية إنشاء حساب عبر البوت (صفحة مخصصة)</li>
+        </ul>
+      </div>
+
+      <footer>نسخة عرض • جميع الحقوق محفوظة © Auto Trader 5</footer>
+    </section>
+
+    <aside class="card" aria-labelledby="login-head">
+      <h3 id="login-head" style="margin:0">تسجيل الدخول</h3>
+      <p class="small">أدخل بريدك الإلكتروني وكلمة المرور لتسجيل الدخول إلى حسابك.</p>
+
+      <form id="loginForm" novalidate>
+        <div style="margin-top:8px">
+          <label for="email">البريد الإلكتروني</label>
+          <input id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required />
+        </div>
+
+        <div style="margin-top:12px">
+          <label for="password">كلمة المرور</label>
+          <input id="password" name="password" type="password" placeholder="********" autocomplete="current-password" required />
+        </div>
+
+        <div id="err" class="error" role="alert" aria-live="assertive">
+          <!-- icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11.998 2C6.477 2 2 6.477 2 12s4.477 10 9.998 10C17.52 22 22 17.523 22 12S17.52 2 11.998 2Zm0 15.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm1-6.5h-2V7h2v4z" fill="currentColor"></path></svg>
+          الحساب غير موجود — الرجاء إنشاء حساب أولاً.
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px">
+          <div class="actions">
+            <button type="submit" class="btn">تسجيل دخول</button>
+            <button type="button" class="btn ghost" id="demoBtn">تسجيل تجريبي</button>
+          </div>
+          <div style="text-align:left">
+            <a href="#create-account" id="createLink" class="muted-link">إنشاء حساب</a>
+          </div>
+        </div>
+      </form>
+
+      <div class="create-panel" id="createPanel" aria-hidden="true">
+        <h4 style="margin:0">إنشاء حساب عبر البوت</h4>
+        <p class="small">يمكنك إنشاء حسابك من خلال البوت. اضغط الزر أدناه لنسخ الرسالة المطلوبة ثم أرسلها للبوت.</p>
+        <div style="display:flex; gap:8px; align-items:center">
+          <input id="botMsg" readonly class="small ghost-btn" value="إنشاء حساب جديد: الاسم - البريد" style="flex:1" />
+          <button id="copyBtn" class="btn">نسخ الرسالة</button>
+        </div>
+        <div style="display:flex; gap:8px; margin-top:6px">
+          <button id="openGuide" class="btn ghost">عرض إرشادات</button>
+          <a id="backToLogin" href="#" class="muted-link">العودة لتسجيل الدخول</a>
+        </div>
+        <p id="copyStatus" class="small" style="display:none; color:var(--muted)">تم نسخ الرسالة! أرسلها الآن إلى البوت لبدء إنشاء الحساب.</p>
+      </div>
+
+    </aside>
+  </main>
+
+  <script>
+    (function(){
+      const form = document.getElementById('loginForm');
+      const err = document.getElementById('err');
+      const email = document.getElementById('email');
+      const password = document.getElementById('password');
+      const createLink = document.getElementById('createLink');
+      const createPanel = document.getElementById('createPanel');
+      const copyBtn = document.getElementById('copyBtn');
+      const botMsg = document.getElementById('botMsg');
+      const copyStatus = document.getElementById('copyStatus');
+      const backToLogin = document.getElementById('backToLogin');
+
+      // Always show "account not found" on submit
+      form.addEventListener('submit', function(ev){
+        ev.preventDefault();
+        // show error (always)
+        err.style.display = 'flex';
+        err.style.animation = 'shake .48s ease';
+        // small accessible focus
+        err.focus && err.focus();
+
+        // shake inputs briefly for feedback
+        [email, password].forEach(i => {
+          i.style.animation = 'shake .48s ease';
+          setTimeout(()=> i.style.animation = '', 500);
+        });
+      });
+
+      // demo button clears fields and also shows error message
+      document.getElementById('demoBtn').addEventListener('click', function(){
+        email.value = 'demo@example.com'; password.value = 'demo1234';
+        err.style.display = 'flex';
+        err.style.animation = 'shake .48s ease';
+      });
+
+      // handle create account link -> open panel (single-file flow)
+      function openCreatePanel(){
+        createPanel.classList.add('open');
+        createPanel.setAttribute('aria-hidden','false');
+        // scroll into view for smaller screens
+        createPanel.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+      function closeCreatePanel(){
+        createPanel.classList.remove('open');
+        createPanel.setAttribute('aria-hidden','true');
+      }
+
+      createLink.addEventListener('click', function(e){ e.preventDefault(); openCreatePanel(); });
+      backToLogin.addEventListener('click', function(e){ e.preventDefault(); closeCreatePanel(); });
+
+      // copy message for user to send to the bot
+      copyBtn.addEventListener('click', async function(){
+        try{
+          await navigator.clipboard.writeText(botMsg.value);
+          copyStatus.style.display = 'block';
+          setTimeout(()=> copyStatus.style.display = 'none', 4000);
+        }catch(e){
+          copyStatus.style.display = 'block'; copyStatus.textContent = 'تعذر النسخ - انسخ الرسالة يدوياً.';
+        }
+      });
+
+      // allow opening panel when hash present
+      if(location.hash === '#create-account') openCreatePanel();
+
+      // keyboard: Esc closes create panel
+      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeCreatePanel(); });
+
+    })();
+  </script>
+</body>
+  </html>
+  
