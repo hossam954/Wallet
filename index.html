@@ -1,250 +1,146 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Auto Trader 5</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Auto Trade 5 — Wallet Login</title>
   <style>
     :root{
-      --bg1:#0f172a;
-      --bg2:#071130;
-      --card:#0b1220;
-      --accent:#06b6d4;
-      --muted:#94a3b8;
-      --glass: rgba(255,255,255,0.04);
-      --danger:#ef4444;
-      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      --mauve:#b388eb; /* mauve */
+      --purple:#5b2c6f; /* deep purple */
+      --bg-gradient: linear-gradient(135deg, rgba(91,44,111,1) 0%, rgba(180,136,235,1) 100%);
+      --card:#fff6ff;
+      --glass: rgba(255,255,255,0.06);
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
-      margin:0; padding:0;
-      background:linear-gradient(180deg,var(--bg1),var(--bg2));
-      color:#e6eef8;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      display:flex; align-items:center; justify-content:center;
+      margin:0;
+      min-height:100vh;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg-gradient);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#241224;
+    }
+    .wrap{
+      width:100%;
+      max-width:420px;
       padding:32px;
+      border-radius:16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.75));
+      box-shadow: 0 10px 30px rgba(40,10,40,0.25);
+      backdrop-filter: blur(6px) saturate(120%);
     }
+    header{
+      text-align:center;
+      margin-bottom:18px;
+    }
+    h1{margin:0;font-size:20px;color:var(--purple)}
+    p.lead{margin:6px 0 0;color:#6b3b6b;font-size:13px}
 
-    .container{
-      width:100%; max-width:980px;
-      display:grid; grid-template-columns:1fr 420px; gap:28px;
+    form{margin-top:18px}
+    label{display:block;font-size:12px;color:#4a2350;margin-bottom:6px}
+    .input{
+      width:100%;
+      padding:12px 14px;
+      border-radius:10px;
+      border:1px solid rgba(90,30,90,0.08);
+      background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.9));
+      outline:none;
+      font-size:14px;
+      margin-bottom:12px;
+      transition:box-shadow .12s, transform .08s;
     }
+    .input:focus{box-shadow:0 6px 18px rgba(91,44,111,0.12); transform:translateY(-1px)}
 
-    .hero{
-      padding:28px; border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      box-shadow:0 8px 30px rgba(2,6,23,0.6); border:1px solid rgba(255,255,255,0.04);
-      display:flex; flex-direction:column; gap:18px; align-items:flex-start; justify-content:center;
-    }
-    .logo{
-      display:flex; align-items:center; gap:12px;
-    }
-    .logo .mark{
-      width:56px; height:56px; border-radius:12px; background:linear-gradient(135deg,var(--accent), #7c3aed);
-      display:flex; align-items:center; justify-content:center; font-weight:700; color:#071130;
-      box-shadow:0 6px 18px rgba(6,182,212,0.15) inset;
-    }
-    h1{margin:0; font-size:22px}
-    p.lead{margin:0; color:var(--muted)}
-
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:14px; padding:28px; width:100%; max-width:420px;
-      box-shadow:0 10px 30px rgba(2,6,23,0.6); border:1px solid rgba(255,255,255,0.04);
-      display:flex; flex-direction:column; gap:16px;
-    }
-
-    label{font-size:13px; color:var(--muted); margin-bottom:6px; display:block}
-    input[type="email"], input[type="password"]{
-      width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.04);
-      background:var(--glass); color:inherit; outline:none; font-size:15px;
-      transition:box-shadow .18s, border-color .18s, transform .08s;
-    }
-    input:focus{box-shadow:0 6px 18px rgba(6,182,212,0.08); border-color:rgba(6,182,212,0.6); transform:translateY(-1px)}
-
-    .actions{display:flex; gap:12px; align-items:center}
+    .row{display:flex;gap:8px}
     .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; border-radius:10px;
-      border:none; cursor:pointer; font-weight:600; font-size:15px; background:var(--accent); color:#04202a;
+      width:100%;
+      padding:12px 14px;
+      border-radius:12px;
+      border:0;
+      font-weight:600;
+      cursor:pointer;
+      font-size:15px;
+      background: linear-gradient(90deg,var(--purple), var(--mauve));
+      color:white;
+      box-shadow: 0 8px 20px rgba(91,44,111,0.18);
+      transition:transform .12s, box-shadow .12s;
     }
-    .btn.ghost{background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); font-weight:600}
-    .muted-link{color:var(--muted); text-decoration:none; font-size:14px}
+    .btn:active{transform:translateY(1px)}
 
-    .error{
-      background:rgba(239,68,68,0.07); border-left:4px solid rgba(239,68,68,0.18); color:var(--danger);
-      padding:10px 12px; border-radius:8px; display:none; font-weight:600; align-items:center; gap:10px
+    .hint{font-size:13px;color:#5a315a;margin-top:12px;text-align:center}
+
+    .notice{
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:10px;
+      background: #fff0fb;
+      border:1px solid rgba(180,136,235,0.25);
+      color:#5b2c6f;
+      display:none;
+      text-align:center;
+      font-weight:600;
+      box-shadow:0 6px 18px rgba(91,44,111,0.06);
     }
 
-    .small{font-size:13px; color:var(--muted)}
+    .small{display:block;text-align:right;font-size:12px;color:#6b3b6b;margin-top:-6px;margin-bottom:12px;text-decoration:none}
 
-    /* subtle animation when error shown */
-    @keyframes shake {
-      0% { transform: translateX(0) }
-      20% { transform: translateX(-6px) }
-      40% { transform: translateX(6px) }
-      60% { transform: translateX(-4px) }
-      80% { transform: translateX(4px) }
-      100% { transform: translateX(0) }
+    @keyframes shake { 0% { transform: translateX(0);} 25%{transform:translateX(-6px)} 50%{transform:translateX(6px)} 75%{transform:translateX(-4px)} 100%{transform:translateX(0)} }
+
+    .notice.show{display:block; animation:shake .45s ease-in-out}
+
+    footer{font-size:12px;color:#4a2350;margin-top:12px;text-align:center}
+
+    @media (max-width:420px){
+      .wrap{margin:18px}
     }
-
-    /* responsive */
-    @media (max-width:880px){
-      .container{grid-template-columns:1fr;}
-      .hero{order:2}
-      .card{order:1}
-    }
-
-    /* create-account panel */
-    .create-panel{display:none; flex-direction:column; gap:12px;}
-    .create-panel.open{display:flex}
-    .ghost-btn{background:transparent; border:1px dashed rgba(255,255,255,0.04); padding:10px; border-radius:8px}
-
-    footer {margin-top:8px; color:var(--muted); font-size:13px}
   </style>
 </head>
 <body>
-  <main class="container" role="main">
-    <section class="hero" aria-labelledby="title">
-      <div class="logo">
-        <div class="mark">AT5</div>
-        <div>
-          <h1 id="title">Auto Trader 5</h1>
-          <p class="lead">لوحة دخول احترافية لتتبع وإدارة صفقاتك — تصميم نظيف وسهل الاستخدام.</p>
-        </div>
-      </div>
+  <main class="wrap" role="main">
+    <header>
+      <h1>Auto Trade 5 — Wallet Login</h1>
+      <p class="lead">Sign in to access your trading wallet</p>
+    </header>
 
-      <div style="margin-top:6px">
-        <h2 style="margin:0 0 8px 0">ميزات سريعة</h2>
-        <ul style="margin:0; padding-left:18px; color:var(--muted)">
-          <li>تصميم متجاوب مناسب للهواتف والحاسوب</li>
-          <li>تنبيهات واضحة عند فشل تسجيل الدخول</li>
-          <li>إمكانية إنشاء حساب عبر البوت (صفحة مخصصة)</li>
-        </ul>
-      </div>
+    <form id="loginForm" novalidate>
+      <label for="email">Email address</label>
+      <input id="email" type="email" class="input" placeholder="you@example.com" autocomplete="email" required>
 
-      <footer>نسخة عرض • جميع الحقوق محفوظة © Auto Trader 5</footer>
-    </section>
+      <label for="password">Password</label>
+      <input id="password" type="password" class="input" placeholder="Enter your password" autocomplete="current-password" required>
 
-    <aside class="card" aria-labelledby="login-head">
-      <h3 id="login-head" style="margin:0">تسجيل الدخول</h3>
-      <p class="small">أدخل بريدك الإلكتروني وكلمة المرور لتسجيل الدخول إلى حسابك.</p>
+      <a class="small" href="#" onclick="event.preventDefault(); alert('Please use the bot to create or recover accounts.');">Forgot password?</a>
 
-      <form id="loginForm" novalidate>
-        <div style="margin-top:8px">
-          <label for="email">البريد الإلكتروني</label>
-          <input id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required />
-        </div>
+      <button class="btn" type="submit">Sign In</button>
+    </form>
 
-        <div style="margin-top:12px">
-          <label for="password">كلمة المرور</label>
-          <input id="password" name="password" type="password" placeholder="********" autocomplete="current-password" required />
-        </div>
+    <div id="notice" class="notice" role="alert" aria-live="assertive"></div>
 
-        <div id="err" class="error" role="alert" aria-live="assertive">
-          <!-- icon -->
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11.998 2C6.477 2 2 6.477 2 12s4.477 10 9.998 10C17.52 22 22 17.523 22 12S17.52 2 11.998 2Zm0 15.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm1-6.5h-2V7h2v4z" fill="currentColor"></path></svg>
-          الحساب غير موجود — الرجاء إنشاء حساب أولاً.
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px">
-          <div class="actions">
-            <button type="submit" class="btn">تسجيل دخول</button>
-            <button type="button" class="btn ghost" id="demoBtn">تسجيل تجريبي</button>
-          </div>
-          <div style="text-align:left">
-            <a href="#create-account" id="createLink" class="muted-link">إنشاء حساب</a>
-          </div>
-        </div>
-      </form>
-
-      <div class="create-panel" id="createPanel" aria-hidden="true">
-        <h4 style="margin:0">إنشاء حساب عبر البوت</h4>
-        <p class="small">يمكنك إنشاء حسابك من خلال البوت. اضغط الزر أدناه لنسخ الرسالة المطلوبة ثم أرسلها للبوت.</p>
-        <div style="display:flex; gap:8px; align-items:center">
-          <input id="botMsg" readonly class="small ghost-btn" value="إنشاء حساب جديد: الاسم - البريد" style="flex:1" />
-          <button id="copyBtn" class="btn">نسخ الرسالة</button>
-        </div>
-        <div style="display:flex; gap:8px; margin-top:6px">
-          <button id="openGuide" class="btn ghost">عرض إرشادات</button>
-          <a id="backToLogin" href="#" class="muted-link">العودة لتسجيل الدخول</a>
-        </div>
-        <p id="copyStatus" class="small" style="display:none; color:var(--muted)">تم نسخ الرسالة! أرسلها الآن إلى البوت لبدء إنشاء الحساب.</p>
-      </div>
-
-    </aside>
+    <footer>
+      <p class="hint">Don’t have an account? Create it via the bot.</p>
+    </footer>
   </main>
 
   <script>
-    (function(){
-      const form = document.getElementById('loginForm');
-      const err = document.getElementById('err');
-      const email = document.getElementById('email');
-      const password = document.getElementById('password');
-      const createLink = document.getElementById('createLink');
-      const createPanel = document.getElementById('createPanel');
-      const copyBtn = document.getElementById('copyBtn');
-      const botMsg = document.getElementById('botMsg');
-      const copyStatus = document.getElementById('copyStatus');
-      const backToLogin = document.getElementById('backToLogin');
+    const form = document.getElementById('loginForm');
+    const notice = document.getElementById('notice');
 
-      // Always show "account not found" on submit
-      form.addEventListener('submit', function(ev){
-        ev.preventDefault();
-        // show error (always)
-        err.style.display = 'flex';
-        err.style.animation = 'shake .48s ease';
-        // small accessible focus
-        err.focus && err.focus();
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
 
-        // shake inputs briefly for feedback
-        [email, password].forEach(i => {
-          i.style.animation = 'shake .48s ease';
-          setTimeout(()=> i.style.animation = '', 500);
-        });
-      });
+      const arabic = 'لم يتم العثور على الحساب. يمكنك انشاء حسابك من خلال البوت.';
+      const english = 'Account not found. You can create your account through the bot.';
 
-      // demo button clears fields and also shows error message
-      document.getElementById('demoBtn').addEventListener('click', function(){
-        email.value = 'demo@example.com'; password.value = 'demo1234';
-        err.style.display = 'flex';
-        err.style.animation = 'shake .48s ease';
-      });
-
-      // handle create account link -> open panel (single-file flow)
-      function openCreatePanel(){
-        createPanel.classList.add('open');
-        createPanel.setAttribute('aria-hidden','false');
-        // scroll into view for smaller screens
-        createPanel.scrollIntoView({behavior:'smooth', block:'center'});
-      }
-      function closeCreatePanel(){
-        createPanel.classList.remove('open');
-        createPanel.setAttribute('aria-hidden','true');
-      }
-
-      createLink.addEventListener('click', function(e){ e.preventDefault(); openCreatePanel(); });
-      backToLogin.addEventListener('click', function(e){ e.preventDefault(); closeCreatePanel(); });
-
-      // copy message for user to send to the bot
-      copyBtn.addEventListener('click', async function(){
-        try{
-          await navigator.clipboard.writeText(botMsg.value);
-          copyStatus.style.display = 'block';
-          setTimeout(()=> copyStatus.style.display = 'none', 4000);
-        }catch(e){
-          copyStatus.style.display = 'block'; copyStatus.textContent = 'تعذر النسخ - انسخ الرسالة يدوياً.';
-        }
-      });
-
-      // allow opening panel when hash present
-      if(location.hash === '#create-account') openCreatePanel();
-
-      // keyboard: Esc closes create panel
-      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeCreatePanel(); });
-
-    })();
+      notice.innerHTML = arabic + '<br><small style="font-weight:500;color:#5a315a;">' + english + '</small>';
+      notice.classList.remove('show');
+      void notice.offsetWidth;
+      notice.classList.add('show');
+      notice.tabIndex = -1;
+      notice.focus();
+    });
   </script>
 </body>
-  </html>
-  
+</html>
